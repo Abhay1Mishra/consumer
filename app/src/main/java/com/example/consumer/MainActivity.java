@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void addToQueueContents(final String message) {
         runOnUiThread(new Runnable() {
             @Override
