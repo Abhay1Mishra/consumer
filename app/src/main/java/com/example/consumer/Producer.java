@@ -20,7 +20,7 @@ public class Producer  implements Runnable {
             mainActivity.addToOutputProducer("Produced: " + product);
             mainActivity.addToQueueContents("Added to Queue: " + product);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Log.d("Producer", "Interrupted exception while producing: " + e.getMessage());
         }
     }
 

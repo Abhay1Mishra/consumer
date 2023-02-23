@@ -20,7 +20,8 @@ public class Consumer implements Runnable{
             mainActivity.addToOutputConsumer("Consumed: " + product);
             mainActivity.addToQueueContents("Removed from Queue: " + product);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            Log.d("Consumer", "Interrupted exception while Consuming: " + e.getMessage());
+
         }
         return product;
     }
