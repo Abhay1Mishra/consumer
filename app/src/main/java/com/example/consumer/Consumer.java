@@ -1,12 +1,17 @@
 package com.example.consumer;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import java.text.BreakIterator;
 import java.util.concurrent.BlockingQueue;
 
-public class Consumer implements Runnable{
+
+public class Consumer implements Runnable {
     private final BlockingQueue<String> queue;
     private final MainActivity mainActivity;
+    private Thread thread;
 
     public Consumer(BlockingQueue<String> queue, MainActivity mainActivity) {
         this.queue = queue;
@@ -24,6 +29,10 @@ public class Consumer implements Runnable{
 
         }
         return product;
+    }
+    public void stop() {
+        boolean isStopped = true;
+        thread.interrupt();
     }
 
     @Override

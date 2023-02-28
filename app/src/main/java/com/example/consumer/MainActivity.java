@@ -14,17 +14,15 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements QueueHandler.QueueListener {
     private TextView outputTextViewProducer;
     private TextView outputTextViewConsumer;
     private TextView queueContentsTextView;
-    private Button produceButton;
-    private Button consumeButton;
 
-    private BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
-    private Producer producer = new Producer(queue, this);
-    private Consumer consumer = new Consumer(queue, this);
-    private ExecutorService threadPool = Executors.newFixedThreadPool(2);
+    private final BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+    private final Producer producer = new Producer(queue, this);
+    private final Consumer consumer = new Consumer(queue, this);
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(2);
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -35,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         outputTextViewProducer = findViewById(R.id.outputTextViewProducer);
         outputTextViewConsumer = findViewById(R.id.outputTextViewConsumer);
         queueContentsTextView = findViewById(R.id.queueContentsTextView);
-        produceButton = findViewById(R.id.produceButton);
-        consumeButton = findViewById(R.id.consumeButton);
+        Button produceButton = findViewById(R.id.produceButton);
+        Button consumeButton = findViewById(R.id.consumeButton);
 
         produceButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         consumeButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 if (queue.isEmpty()) {

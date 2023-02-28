@@ -1,14 +1,15 @@
 package com.example.consumer;
 
+import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.util.Log;
 
-import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
-public class Producer  implements Runnable {
+public class Producer implements Runnable {
     private final BlockingQueue<String> queue;
     private final MainActivity mainActivity;
-
+    private Thread thread;
     public Producer(BlockingQueue<String> queue, MainActivity mainActivity) {
         this.queue = queue;
         this.mainActivity = mainActivity;
@@ -23,6 +24,10 @@ public class Producer  implements Runnable {
             Log.d("Producer", "Interrupted exception while producing: " + e.getMessage());
         }
     }
+    public void stop() {
+        boolean isStopped = true;
+        thread.interrupt();
+    }
 
 
     @Override
@@ -30,3 +35,6 @@ public class Producer  implements Runnable {
 
     }
 }
+
+
+
