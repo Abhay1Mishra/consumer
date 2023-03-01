@@ -4,11 +4,12 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class QueueHandler {
-    private final Producer producer;
-    private final Consumer consumer;
+    private  Producer producer ;
+    private  Consumer consumer ;
+    private  BlockingQueue<String> queue;
 
     public QueueHandler(MainActivity mainActivity) {
-        BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+        queue = new ArrayBlockingQueue<>(10);
         this.producer = new Producer(queue, mainActivity);
         this.consumer = new Consumer(queue, mainActivity);
     }
@@ -17,7 +18,7 @@ public class QueueHandler {
         producer.produce(product);
     }
 
-    public String consume() {
+    public  String consume() {
         return consumer.consume();
     }
 
@@ -31,6 +32,9 @@ public class QueueHandler {
         consumer.stop();
     }
 
+    public int getQueueSize() {
+        return queue.size();
+    }
 
 
     public interface QueueListener {

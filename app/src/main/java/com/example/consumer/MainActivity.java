@@ -18,11 +18,10 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
     private TextView outputTextViewProducer;
     private TextView outputTextViewConsumer;
     private TextView queueContentsTextView;
+    private Button produceButton;
+    private Button consumeButton;
 
-    private final BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
-    private final Producer producer = new Producer(queue, this);
-    private final Consumer consumer = new Consumer(queue, this);
-    private final ExecutorService threadPool = Executors.newFixedThreadPool(2);
+    private QueueHandler queueHandler;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,13 +32,15 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
         outputTextViewProducer = findViewById(R.id.outputTextViewProducer);
         outputTextViewConsumer = findViewById(R.id.outputTextViewConsumer);
         queueContentsTextView = findViewById(R.id.queueContentsTextView);
-        Button produceButton = findViewById(R.id.produceButton);
-        Button consumeButton = findViewById(R.id.consumeButton);
+        produceButton = findViewById(R.id.produceButton);
+        consumeButton = findViewById(R.id.consumeButton);
+
+        queueHandler = new QueueHandler(this);
 
         produceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                producer.produce("Product " + (queue.size() + 1));
+                queueHandler.produce("Product " + (queueHandler.getQueueSize() + 1));
             }
         });
 
@@ -47,19 +48,16 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                if (queue.isEmpty()) {
+                String product = queueHandler.consume();
+                if (product == null) {
                     outputTextViewConsumer.setText("Queue is empty");
                 } else {
-                    String product = consumer.consume();
                     outputTextViewConsumer.setText("Consumed: " + product);
-                    queueContentsTextView.setText("Queue Contents: " + queue.toString());
                 }
             }
         });
 
-
-        new Thread(producer).start();
-        new Thread(consumer).start();
+        queueHandler.start();
     }
 
     public void addToOutputProducer(final String message) {
