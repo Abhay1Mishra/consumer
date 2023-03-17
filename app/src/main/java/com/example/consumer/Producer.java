@@ -8,23 +8,35 @@ import java.util.concurrent.BlockingQueue;
 
 public class Producer implements Runnable {
     private final BlockingQueue<String> queue;
-    private final MainActivity mainActivity;
+    private final QueueHandler.QueueListener listener;
+    private volatile boolean isStopped = false;
     private Thread thread;
-    public Producer(BlockingQueue<String> queue, MainActivity mainActivity) {
+
+    public Producer(BlockingQueue<String> queue, QueueHandler.QueueListener listener) {
         this.queue = queue;
-        this.mainActivity = mainActivity;
+        this.listener = listener;
     }
 
     public void produce(String product) {
         try {
             queue.put(product);
-            mainActivity.addToOutputProducer("Produced: " + product);
-            mainActivity.addToQueueContents("Added to Queue: " + product);
+            listener.addToOutputProducer(product);
+            listener.addToQueueContents(getQueueContents());
         } catch (InterruptedException e) {
-            Log.d("Producer", "Interrupted exception while producing: " + e.getMessage());
+            Thread.currentThread().interrupt();
         }
     }
-    public void stop() {
+
+    // ...
+
+    private String getQueueContents() {
+        StringBuilder sb = new StringBuilder();
+        for (String item : queue) {
+            sb.append(item).append("\n");
+        }
+        return sb.toString();
+    }
+   public void stop() {
         boolean isStopped = true;
         thread.interrupt();
     }
@@ -35,6 +47,5 @@ public class Producer implements Runnable {
 
     }
 }
-
 
 

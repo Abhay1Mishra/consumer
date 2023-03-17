@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,61 +8,70 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+
     <TextView
         android:id="@+id/outputTextViewProducer"
-        android:layout_width="0dp"
-        android:gravity="center"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />
+        android:layout_marginStart="119dp"
+        android:layout_marginEnd="119dp"
+        android:layout_marginBottom="25dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxEms="10"
+        app:layout_constraintBottom_toTopOf="@+id/produceButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/consumeButton" />
+
     <TextView
         android:id="@+id/queueContentsTextView"
-        android:layout_width="0dp"
-        android:gravity="center"
-        android:layout_weight="1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-         />
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="127dp"
+
+        android:layout_marginEnd="205dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:maxEms="10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/outputTextViewConsumer"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
- />
-</LinearLayout>
+        android:layout_weight="1"
+        android:maxEms="10"
+        app:layout_constraintBottom_toBottomOf="@+id/outputTextViewProducer"
+        app:layout_constraintEnd_toEndOf="@+id/consumeButton"
+        app:layout_constraintStart_toStartOf="@+id/consumeButton" />
+
+    <Button
+        android:id="@+id/consumeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="14dp"
+        android:layout_weight="1"
+        android:text="consume"
+        app:layout_constraintEnd_toStartOf="@+id/produceButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/produceButton" />
+
+    <Button
+        android:id="@+id/produceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_weight="1"
+        android:text="produce"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/consumeButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-
-            <Button
-                android:id="@+id/consumeButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:text="consume" />
-
-            <Button
-                android:id="@+id/produceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:text="produce" />
-        </LinearLayout>
-
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,33 +10,42 @@ import java.util.concurrent.BlockingQueue;
 
 public class Consumer implements Runnable {
     private final BlockingQueue<String> queue;
-    private final MainActivity mainActivity;
+    private final QueueHandler.QueueListener listener;
+    private volatile boolean isStopped = false;
     private Thread thread;
 
-    public Consumer(BlockingQueue<String> queue, MainActivity mainActivity) {
+    public Consumer(BlockingQueue<String> queue, QueueHandler.QueueListener listener) {
         this.queue = queue;
-        this.mainActivity = mainActivity;
+        this.listener = listener;
     }
 
     public String consume() {
         String product = null;
         try {
             product = queue.take();
-            mainActivity.addToOutputConsumer("Consumed: " + product);
-            mainActivity.addToQueueContents("Removed from Queue: " + product);
+            listener.addToOutputConsumer(product);
+            listener.addToQueueContents(getQueueContents());
         } catch (InterruptedException e) {
-            Log.d("Consumer", "Interrupted exception while Consuming: " + e.getMessage());
-
+            Thread.currentThread().interrupt();
         }
         return product;
     }
-    public void stop() {
-        boolean isStopped = true;
-        thread.interrupt();
+
+
+
+    private String getQueueContents() {
+        StringBuilder sb = new StringBuilder();
+        for (String item : queue) {
+            sb.append(item).append("\n");
+        }
+        return sb.toString();
     }
 
     @Override
     public void run() {
 
+    }
+
+    public void stop() {
     }
 }
