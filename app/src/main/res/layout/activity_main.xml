@@ -27,16 +27,16 @@
         android:id="@+id/queueContentsTextView"
         android:layout_width="205dp"
         android:layout_height="55dp"
-        android:layout_marginTop="127dp"
-
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="204dp"
         android:layout_weight="1"
         android:gravity="center"
         android:maxEms="10"
-        app:layout_constraintBottom_toBottomOf="@+id/outputTextViewConsumer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/produceButton"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toStartOf="@+id/consumeButton" />
 
     <TextView
         android:id="@+id/outputTextViewConsumer"
