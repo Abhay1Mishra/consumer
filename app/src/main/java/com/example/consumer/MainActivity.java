@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
                     outputTextViewConsumer.setText("Queue is empty");
                 } else {
                     outputTextViewConsumer.setText("Consumed: " + product);
+                    queueContentsTextView.setText("Queue Contents: " + queueHandler.queue.toString());
                 }
             }
         });

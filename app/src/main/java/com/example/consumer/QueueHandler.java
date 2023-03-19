@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 public class QueueHandler {
     private final Producer producer ;
     private final Consumer consumer ;
-    private final ArrayBlockingQueue<String> queue;
+    public ArrayBlockingQueue<String> queue;
 
     public QueueHandler(MainActivity mainActivity) {
         queue = new ArrayBlockingQueue<>(10);
