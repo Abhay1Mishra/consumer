@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
     private TextView outputTextViewProducer;
     private TextView outputTextViewConsumer;
     private TextView queueContentsTextView;
-    private Button produceButton;
-    private Button consumeButton;
 
     private QueueHandler queueHandler;
 
@@ -32,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
         outputTextViewProducer = findViewById(R.id.outputTextViewProducer);
         outputTextViewConsumer = findViewById(R.id.outputTextViewConsumer);
         queueContentsTextView = findViewById(R.id.queueContentsTextView);
-        produceButton = findViewById(R.id.produceButton);
-        consumeButton = findViewById(R.id.consumeButton);
+        Button produceButton = findViewById(R.id.produceButton);
+        Button consumeButton = findViewById(R.id.consumeButton);
 
         queueHandler = new QueueHandler(this);
 

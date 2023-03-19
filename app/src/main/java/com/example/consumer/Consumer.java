@@ -5,16 +5,17 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.text.BreakIterator;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 
 public class Consumer implements Runnable {
-    private final BlockingQueue<String> queue;
+    private final ArrayBlockingQueue<String> queue;
     private final QueueHandler.QueueListener listener;
     private volatile boolean isStopped = false;
     private Thread thread;
 
-    public Consumer(BlockingQueue<String> queue, QueueHandler.QueueListener listener) {
+    public Consumer(ArrayBlockingQueue<String> queue, QueueHandler.QueueListener listener) {
         this.queue = queue;
         this.listener = listener;
     }

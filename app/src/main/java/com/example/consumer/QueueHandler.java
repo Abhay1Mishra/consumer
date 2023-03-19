@@ -4,9 +4,9 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class QueueHandler {
-    private  Producer producer ;
-    private  Consumer consumer ;
-    private  BlockingQueue<String> queue;
+    private final Producer producer ;
+    private final Consumer consumer ;
+    private final ArrayBlockingQueue<String> queue;
 
     public QueueHandler(MainActivity mainActivity) {
         queue = new ArrayBlockingQueue<>(10);
