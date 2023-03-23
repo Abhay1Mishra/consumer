@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity implements QueueHandler.QueueListener {
+public class MainActivity extends AppCompatActivity implements QueueListener {
     private TextView outputTextViewProducer;
     private TextView outputTextViewConsumer;
     private TextView queueContentsTextView;
@@ -48,10 +49,12 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
             public void onClick(View view) {
                 String product = queueHandler.consume();
                 if (product == null) {
+
                     outputTextViewConsumer.setText("Queue is empty");
+
                 } else {
                     outputTextViewConsumer.setText("Consumed: " + product);
-                    queueContentsTextView.setText("Queue Contents: " + queueHandler.queue.toString());
+                    queueContentsTextView.setText("Queue Contents: " + queueHandler.queue.toString()+"\n");
                 }
             }
         });
@@ -72,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
+
                 queueContentsTextView.setText(message);
+
             }
         });
     }
@@ -85,4 +90,5 @@ public class MainActivity extends AppCompatActivity implements QueueHandler.Queu
             }
         });
     }
+
 }

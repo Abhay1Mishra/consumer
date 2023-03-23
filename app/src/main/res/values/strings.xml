@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">consumer</string>
+    <string name="produce">produce</string>
+    <string name="consume">consume</string>
 </resources>

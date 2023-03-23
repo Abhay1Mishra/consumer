@@ -1,5 +1,9 @@
 package com.example.consumer;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -8,10 +12,10 @@ public class QueueHandler {
     private final Consumer consumer ;
     public ArrayBlockingQueue<String> queue;
 
-    public QueueHandler(MainActivity mainActivity) {
+    public QueueHandler(QueueListener listener) {
         queue = new ArrayBlockingQueue<>(10);
-        this.producer = new Producer(queue, mainActivity);
-        this.consumer = new Consumer(queue, mainActivity);
+        this.producer = new Producer(queue, listener);
+        this.consumer = new Consumer(queue, listener);
     }
 
     public void produce(String product) {
@@ -27,19 +31,14 @@ public class QueueHandler {
         new Thread(consumer).start();
     }
 
-    public void stop() {
-        producer.stop();
-        consumer.stop();
-    }
+
 
     public int getQueueSize() {
         return queue.size();
     }
 
-
-    public interface QueueListener {
-        void addToOutputProducer(String product);
-        void addToOutputConsumer(String product);
-        void  addToQueueContents(String contents);
+    public void onDataConsumed(Object data) {
+        Log.d(TAG, "Data consumed: " + data.toString());
     }
+
 }

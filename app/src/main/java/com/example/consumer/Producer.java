@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Producer implements Runnable {
     private final ArrayBlockingQueue<String> queue;
-    private final QueueHandler.QueueListener listener;
+    private final QueueListener listener;
     private Thread thread;
-
-    public Producer(ArrayBlockingQueue<String>queue, QueueHandler.QueueListener listener) {
+    private QueueHandler queueHandler;
+    public Producer(ArrayBlockingQueue<String>queue,QueueListener listener) {
         this.queue = queue;
         this.listener = listener;
     }
@@ -42,15 +42,17 @@ public class Producer implements Runnable {
         }
         return sb.toString();
     }
-   public void stop() {
-       boolean isStopped = true;
-        thread.interrupt();
-    }
+
 
 
     @Override
     public void run() {
+        for (int i = 1; i <= queue.size(); i++) {
+            String message = "Message " + i;
+            Log.d("Producer", "Producing message: " + message);
+            queueHandler.onDataConsumed(message);
 
+        }
     }
 }
 
