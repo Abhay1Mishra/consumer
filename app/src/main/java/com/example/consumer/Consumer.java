@@ -48,6 +48,7 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
 
+<<<<<<< HEAD
         try {
             for (int i = 0; i < queue.size(); i++) {
                 String num =queue.take();
@@ -57,6 +58,9 @@ public class Consumer implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+=======
+
+>>>>>>> 3f47855 (Merge remote-tracking branch 'github/main')
 
     }
 

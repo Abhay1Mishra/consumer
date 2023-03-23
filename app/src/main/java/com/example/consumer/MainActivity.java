@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements QueueListener {
 
                 } else {
                     outputTextViewConsumer.setText("Consumed: " + product);
-                    queueContentsTextView.setText("Queue Contents: " + queueHandler.queue.toString()+"\n");
+                    queueContentsTextView.setText("Queue Contents: " + queueHandler.queue.toString() + "\n");
                 }
             }
         });
@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements QueueListener {
             @Override
             public void run() {
                 outputTextViewProducer.append(message + "\n");
+                Log.d("Producer", "Producing message: " + message);
+
+
             }
         });
     }
@@ -87,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements QueueListener {
             @Override
             public void run() {
                 outputTextViewConsumer.append(message + "\n");
+
+
+                Log.d("CONSUMER", "Consumed: " + message);
+
             }
         });
     }

@@ -37,8 +37,12 @@ public class QueueHandler {
         return queue.size();
     }
 
+<<<<<<< HEAD
     public void onDataConsumed(Object data) {
         Log.d(TAG, "Data consumed: " + data.toString());
     }
+=======
+
+>>>>>>> 3f47855 (Merge remote-tracking branch 'github/main')
 
 }
