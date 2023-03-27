@@ -8,8 +8,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class QueueHandler {
-    private final Producer producer ;
-    private final Consumer consumer ;
+    private final Producer producer;
+    private final Consumer consumer;
     public ArrayBlockingQueue<String> queue;
 
     public QueueHandler(QueueListener listener) {
@@ -22,27 +22,18 @@ public class QueueHandler {
         producer.produce(product);
     }
 
-    public  String consume() {
+    public String consume() {
         return consumer.consume();
     }
-
-    public void start() {
-        new Thread(producer).start();
-        new Thread(consumer).start();
-    }
-
 
 
     public int getQueueSize() {
         return queue.size();
     }
 
-<<<<<<< HEAD
+
     public void onDataConsumed(Object data) {
         Log.d(TAG, "Data consumed: " + data.toString());
     }
-=======
-
->>>>>>> 3f47855 (Merge remote-tracking branch 'github/main')
 
 }

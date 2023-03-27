@@ -11,11 +11,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 
-public class Consumer implements Runnable {
+public class Consumer {
     private final ArrayBlockingQueue<String> queue;
     private final QueueListener listener;
-    private volatile boolean isStopped = false;
-    private Thread thread;
+
+
     private QueueHandler queueHandler;
 
     public Consumer(ArrayBlockingQueue<String> queue, QueueListener listener) {
@@ -29,12 +29,11 @@ public class Consumer implements Runnable {
             product = queue.take();
             listener.addToOutputConsumer(product);
             listener.addToQueueContents(getQueueContents());
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        } catch (InterruptedException ignored) {
+
         }
         return product;
     }
-
 
 
     private String getQueueContents() {
@@ -43,25 +42,6 @@ public class Consumer implements Runnable {
             sb.append(item).append("\n");
         }
         return sb.toString();
-    }
-
-    @Override
-    public void run() {
-
-<<<<<<< HEAD
-        try {
-            for (int i = 0; i < queue.size(); i++) {
-                String num =queue.take();
-                Log.d("CONSUMER", "Consumed: " + num);
-                queueHandler.onDataConsumed(num);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-=======
-
->>>>>>> 3f47855 (Merge remote-tracking branch 'github/main')
-
     }
 
 

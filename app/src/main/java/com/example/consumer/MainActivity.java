@@ -59,43 +59,29 @@ public class MainActivity extends AppCompatActivity implements QueueListener {
             }
         });
 
-        queueHandler.start();
+
     }
 
     public void addToOutputProducer(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                outputTextViewProducer.append(message + "\n");
-                Log.d("Producer", "Producing message: " + message);
+
+        outputTextViewProducer.append(message + "\n");
+        Log.d("Producer", "Producing message: " + message);
 
 
-            }
-        });
     }
 
     public void addToQueueContents(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
 
-                queueContentsTextView.setText(message);
+        queueContentsTextView.setText(message);
 
-            }
-        });
+
     }
 
     public void addToOutputConsumer(final String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                outputTextViewConsumer.append(message + "\n");
 
+        outputTextViewConsumer.append(message + "\n");
+        Log.d("CONSUMER", "Consumed: " + message);
 
-                Log.d("CONSUMER", "Consumed: " + message);
-
-            }
-        });
     }
 
 }
